@@ -1,29 +1,26 @@
 from description import *
-from ThingsAPI import *
+from actors import *
 import config
 import context
 
 def buildPDDL():
-    things = searchThings(config.ThingsAPI["namespace"])
+    services = searchServices()
 
     services = [] 
     capabilities = [] 
     instances = context.instances 
     tasks = [] 
-    atomicTerms = context.atomicTerms 
+    atomicTerms = context.atomicTerms
     groundAtomicTerms = context.groundAtomicTerms
 
     goal = context.goal
     requirements = context.requirements
 
-    for t in things:
-        
-        s = t["thingId"].split(":")[1]
+    for service in services:    
+        s = service["id"]
         services.append(s)
-        
 
-        features = t["features"]
-        
+        features = service["features"]
         for f in features:
             feature = features[f]
             props = features[f]["properties"]
@@ -45,7 +42,7 @@ def buildPDDL():
             elif featureType == "operation":
                 capabilities.append(f)
                 name = props["command"]
-                print(t["thingId"])
+                print(service["id"])
                 cost = props["cost"]
                 params = props["parameters"]
                 
