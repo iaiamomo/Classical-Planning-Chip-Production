@@ -21,11 +21,13 @@ def buildPDDL():
         services.append(s)
 
         features = service["features"]
-        for f in features:
-            feature = features[f]
-            props = features[f]["properties"]
+        actions = features["actions"]
+        for a in actions:
+            action = actions[a]
+            props = action["properties"]
             featureType = props["type"]
             
+            """
             if featureType == "state":
                  domain = props["domain"]
                  valueType = props["value"]["type"]
@@ -40,7 +42,9 @@ def buildPDDL():
                  groundAtomicTerms.append(g)        
                                 
             elif featureType == "operation":
-                capabilities.append(f)
+            """
+            if featureType == "operation":
+                capabilities.append(a)
                 name = props["command"]
                 print(service["id"])
                 cost = props["cost"]
@@ -76,7 +80,7 @@ def buildPDDL():
                             addEff,
                             delEff,
                             providedBy,
-                            f,
+                            a,
                             cost
                             )
                 tasks.append(task)
