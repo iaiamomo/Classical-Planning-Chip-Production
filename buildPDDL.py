@@ -1,5 +1,5 @@
 from description import *
-from actors import *
+from actorsAPI import *
 import config
 import context
 

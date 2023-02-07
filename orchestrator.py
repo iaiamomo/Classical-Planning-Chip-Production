@@ -1,11 +1,11 @@
 import asyncio
-import websockets
 import json
 import config
 import subprocess
 from buildPDDL import *
 from config import *
-import urllib.parse
+import requests
+from actorsAPI import *
 
 
 async def executionEngine():
@@ -28,7 +28,7 @@ async def executionEngine():
             if line[0] == ";":
                 break
             tokens = line.replace("(","").replace(")","").strip().split(" ")
-            thingId = tokens[1]
+            serviceId = tokens[1]
             cmd = tokens[0]
             params = []
             for i in range(2, len(tokens)):
@@ -36,27 +36,26 @@ async def executionEngine():
 
             expected = desc.getGroundedEffect(cmd, params)
             print("Issuing command " + tokens[0] +
-                    " to " + thingId + " with parameters " +
+                    " to " + serviceId + " with parameters " +
                     str(params))
                     
             print("Expected result: " + str(expected))
 
-            body = json.dumps({"command": cmd, "service_id": thingId, "parameters": params})
+            body = json.dumps({"command": cmd, "service_id": serviceId, "parameters": params})
             output = None
             while True:
                 try:
-                    response = requests.post(f'http://localhost:8080/execute-service-action/{thingId}', data=body)
+                    response = sendMessage(serviceId, body)
                 except requests.exceptions.Timeout:
                     print("Expired timer! Adapting...")
                     return 1
-                event = json.loads(response)
+                event = json.loads(response.content)
+                print(event)
                 value = event["value"]
-                path = event["path"]
+                output = event["output"]
 
                 if value == "terminated":
                     break
-                if "output" in path:
-                    output = value
 
             print("Received output: " + str(output))
             if output != expected:
