@@ -4,7 +4,7 @@ import config
 import context
 
 def buildPDDL():
-    services = searchServices()
+    servicesAPI = searchServices()
 
     services = [] 
     capabilities = [] 
@@ -16,74 +16,77 @@ def buildPDDL():
     goal = context.goal
     requirements = context.requirements
 
-    for service in services:    
+    for service in servicesAPI:
         s = service["id"]
         services.append(s)
 
         features = service["features"]
-        actions = features["actions"]
-        for a in actions:
-            action = actions[a]
-            props = action["properties"]
-            featureType = props["type"]
-            
-            """
-            if featureType == "state":
-                 domain = props["domain"]
-                 valueType = props["value"]["type"]
-                 a = atomicTerm(f,
-                        domain[0].lower()+":"+domain,
-                        valueType[0].lower()+":"+valueType,
-                        )
-                 atomicTerms.append(a)
-                 g = groundAtomicTerm(f,s,
-                        props["value"]["current"]
-                        )
-                 groundAtomicTerms.append(g)        
-                                
-            elif featureType == "operation":
-            """
-            if featureType == "operation":
-                capabilities.append(a)
-                name = props["command"]
-                print(service["id"])
-                cost = props["cost"]
-                params = props["parameters"]
-                
-                posPrec = []
-                negPrec = []
-                addEff = []
-                delEff = []
-                try:
-                    posPrec = props["requirements"]["positive"]
-                except KeyError:
-                    pass
-                try:
-                    negPrec = props["requirements"]["negative"]
-                except KeyError:
-                    pass
-                try:
-                    addEff = props["effects"]["added"]
-                except KeyError:
-                    pass
-                try:
-                    delEff = props["effects"]["deleted"]
-                except KeyError:
-                    pass
+        attributes = service["attributes"]
+        serviceType = attributes["type"]
 
-                providedBy = s 
+        if serviceType == "Service":        
+            actions = attributes["actions"]
+            for a in actions:
+                action = actions[a]
+                props = action["properties"]
+                featureType = props["type"]
                 
-                task = Task(name,
-                            params,
-                            posPrec,
-                            negPrec,
-                            addEff,
-                            delEff,
-                            providedBy,
-                            a,
-                            cost
+                """
+                if featureType == "state":
+                    domain = props["domain"]
+                    valueType = props["value"]["type"]
+                    a = atomicTerm(f,
+                            domain[0].lower()+":"+domain,
+                            valueType[0].lower()+":"+valueType,
                             )
-                tasks.append(task)
+                    atomicTerms.append(a)
+                    g = groundAtomicTerm(f,s,
+                            props["value"]["current"]
+                            )
+                    groundAtomicTerms.append(g)        
+                                    
+                elif featureType == "operation":
+                """
+                if featureType == "operation":
+                    capabilities.append(a)
+                    name = props["command"]
+                    cost = props["cost"]
+                    params = props["parameters"]
+                    
+                    posPrec = []
+                    negPrec = []
+                    addEff = []
+                    delEff = []
+                    try:
+                        posPrec = props["requirements"]["positive"]
+                    except KeyError:
+                        pass
+                    try:
+                        negPrec = props["requirements"]["negative"]
+                    except KeyError:
+                        pass
+                    try:
+                        addEff = props["effects"]["added"]
+                    except KeyError:
+                        pass
+                    try:
+                        delEff = props["effects"]["deleted"]
+                    except KeyError:
+                        pass
+
+                    providedBy = s 
+                    
+                    task = Task(name,
+                                params,
+                                posPrec,
+                                negPrec,
+                                addEff,
+                                delEff,
+                                providedBy,
+                                a,
+                                cost
+                                )
+                    tasks.append(task)
                 
     desc = Description(services,capabilities,
                        instances,tasks,atomicTerms,

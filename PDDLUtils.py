@@ -1,3 +1,5 @@
+import context
+
 def getInit(groundAtomicTerms, tasks):
     res = "(:init \n"
     
@@ -53,10 +55,15 @@ def getObjects(instances, tasks):  #{"Object":["ball","box"]}
 def getTypes(instances):
     res = "(:types \nService - Thing\nCapability\n"
 
+    subtype_object = context.types["Object"]
     for k in instances:
         if k == "Object":
             res += k + " - " + "Thing" + "\n"
             continue
+        else:
+            if k in subtype_object:
+                res += k + " - " + "Object" + "\n"
+                continue
         res += k + "\n"
 
     res += ")\n"

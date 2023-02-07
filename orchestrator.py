@@ -16,7 +16,7 @@ async def executionEngine():
     # Call planner
     # If plan not found, return 2 
     print("Invoking planner...")
-    command = "./dawnward/fast-downward.py " + config.PDDL["domainFile"] + " " + config.PDDL["problemFile"] + " " + "--search " + '"astar(lmcut())"' 
+    command = "./downward/fast-downward.py " + config.PDDL["domainFile"] + " " + config.PDDL["problemFile"] + " " + "--search " + '"astar(lmcut())"' 
     result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
     print(f"result planner: {result.returncode}")
     if (result.returncode > 9):
@@ -45,7 +45,7 @@ async def executionEngine():
             output = None
             while True:
                 try:
-                    response = requests.post(f'https://localhost:8080/execute-service-action/{thingId}', data=body)
+                    response = requests.post(f'http://localhost:8080/execute-service-action/{thingId}', data=body)
                 except requests.exceptions.Timeout:
                     print("Expired timer! Adapting...")
                     return 1
