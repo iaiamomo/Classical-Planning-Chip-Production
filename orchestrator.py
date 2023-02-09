@@ -50,7 +50,6 @@ async def executionEngine():
                     print("Expired timer! Adapting...")
                     return 1
                 event = json.loads(response.content)
-                print(event)
                 value = event["value"]
                 output = event["output"]
 
@@ -63,9 +62,11 @@ async def executionEngine():
                 return 1
     return 0
 
+
 result = asyncio.get_event_loop().run_until_complete(executionEngine())
-while result == 1:
-    result = asyncio.get_event_loop().run_until_complete(executionEngine())
+#while result == 1:
+#    result = asyncio.get_event_loop().run_until_complete(executionEngine())
+
 
 if result == 0:
     print("Success!")

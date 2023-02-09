@@ -19,7 +19,7 @@ cd downward
 
 ## How to run the code
 
-1. Put the descriptions of the industral actors inside [device_descriptions](https://github.com/iaiamomo/IndustrialAPIs/tree/main/actors_api_plan/device_descriptions) folder (refer to [template.json](IndustrialAPIs/actors_api_plan/device_descriptions/template.json)).
+1. Put the descriptions of the industral actors inside [device_descriptions](https://github.com/iaiamomo/IndustrialAPIs/tree/main/actors_api_plan/device_descriptions) folder (refer to [template](https://github.com/iaiamomo/IndustrialAPIs/blob/main/README.md#industrial-apis)).
 
 2. Generate Python client from OpenAPI v3.0 specification:
 ```sh

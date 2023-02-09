@@ -11,7 +11,8 @@ def buildPDDL():
     instances = context.instances 
     tasks = [] 
     atomicTerms = context.atomicTerms
-    groundAtomicTerms = context.groundAtomicTerms
+    #groundAtomicTerms = context.groundAtomicTerms
+    groundAtomicTerms = []
 
     goal = context.goal
     requirements = context.requirements
@@ -23,6 +24,12 @@ def buildPDDL():
         features = service["features"]
         attributes = service["attributes"]
         serviceType = attributes["type"]
+
+        for f in features.keys():
+            feature = features[f]
+            value = feature["properties"]["value"]
+            groundAtomicTerms.append(groundAtomicTerm(f,s,value))
+
 
         if serviceType == "Service":        
             actions = attributes["actions"]

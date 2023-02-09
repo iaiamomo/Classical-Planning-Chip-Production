@@ -13,7 +13,8 @@ def getInit(groundAtomicTerms, tasks):
             continue
         res += "(" + a.name + " " + a.inp + " " + a.out + ")\n"
 
-    #res += "(= (total-cost) 0)" + "\n"
+    #cost
+    res += "(= (total-cost) 0)" + "\n"
     res += ")\n"
     return res
 
@@ -118,7 +119,8 @@ def getActions(tasks):
         eff = ":effect (and "
         eff += getFormula(t.addEff)
         eff += getNegativeFormula(t.delEff)
-        #eff += "(increase (total-cost)" + " " + str(t.cost) + ")"
+        #cost
+        eff += "(increase (total-cost)" + " " + str(t.cost) + ")"
         eff += ")" + "\n"
         res += "(:action" + " " + t.name + "\n" + params + prec + eff + ")\n"
     return res
@@ -129,8 +131,8 @@ def getPredicates(atomicTerms):
 
     names = []
     for a in atomicTerms:
-        if a.name in names:
-            continue
+        #if a.name in names:
+        #    continue
         names.append(a.name)
         inp = "?" + a.inp.strip().replace(":", " - ")
         out = "?" + a.out.strip().replace(":", " - ")

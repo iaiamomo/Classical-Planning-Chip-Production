@@ -17,8 +17,9 @@ class Description:
         res += getRequirements(requirements)
         res += getTypes(self.instances)
         res += getPredicates(self.atomicTerms)
+        #cost
+        res += "(:functions (total-cost))" + "\n"
         res += getActions(self.tasks)
-        #res += "(:functions (total-cost))" + "\n"
         res += "\n"
         res += ")"
         return res
@@ -30,7 +31,8 @@ class Description:
         res += getObjects(self.instances, self.tasks)
         res += getInit(self.groundAtomicTerms, self.tasks)
         res += getGoal(goal)
-        #res += "(:metric minimize (total-cost))" + "\n"
+        #cost
+        res += "(:metric minimize (total-cost))" + "\n"
         res += "\n"
         res += ")"
         return res
