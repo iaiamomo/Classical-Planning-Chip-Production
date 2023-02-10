@@ -64,8 +64,8 @@ async def executionEngine():
 
 
 result = asyncio.get_event_loop().run_until_complete(executionEngine())
-#while result == 1:
-#    result = asyncio.get_event_loop().run_until_complete(executionEngine())
+while result == 1:
+    result = asyncio.get_event_loop().run_until_complete(executionEngine())
 
 
 if result == 0:

@@ -30,7 +30,6 @@ def buildPDDL():
             value = feature["properties"]["value"]
             groundAtomicTerms.append(groundAtomicTerm(f,s,value))
 
-
         if serviceType == "Service":        
             actions = attributes["actions"]
             for a in actions:
@@ -38,22 +37,6 @@ def buildPDDL():
                 props = action["properties"]
                 featureType = props["type"]
                 
-                """
-                if featureType == "state":
-                    domain = props["domain"]
-                    valueType = props["value"]["type"]
-                    a = atomicTerm(f,
-                            domain[0].lower()+":"+domain,
-                            valueType[0].lower()+":"+valueType,
-                            )
-                    atomicTerms.append(a)
-                    g = groundAtomicTerm(f,s,
-                            props["value"]["current"]
-                            )
-                    groundAtomicTerms.append(g)        
-                                    
-                elif featureType == "operation":
-                """
                 if featureType == "operation":
                     capabilities.append(a)
                     name = props["command"]
@@ -94,6 +77,26 @@ def buildPDDL():
                                 cost
                                 )
                     tasks.append(task)
+            #state = attributes["status"]
+            #value = state["properties"]["value"]
+            #atomicTerms.append(atomicTerm("status",s+":Service",value+":State"))
+
+            """
+            if featureType == "state":
+                domain = props["domain"]
+                valueType = props["value"]["type"]
+                a = atomicTerm(f,
+                        domain[0].lower()+":"+domain,
+                        valueType[0].lower()+":"+valueType,
+                        )
+                atomicTerms.append(a)
+                g = groundAtomicTerm(f,s,
+                        props["value"]["current"]
+                        )
+                groundAtomicTerms.append(g)        
+                                
+            elif featureType == "operation":
+            """
                 
     desc = Description(services,capabilities,
                        instances,tasks,atomicTerms,

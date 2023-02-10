@@ -5,7 +5,8 @@ instances = {   "Design":["design"],
                 "PhosphorMaterial":["phosphor"],
                 "SiliconMaterial":["silicon"],
                 "Material":["wafer"],
-                "Boolean":["true","false"]}
+                "Boolean":["true","false"],
+                "State":["available","broken"]}
 
 types = { "Object": [] }
 
@@ -29,7 +30,8 @@ atomicTerms = [ atomicTerm("taken", "o - Design", "b - Boolean"),
                 atomicTerm("stripped", "o - Material", "b - Boolean"),
                 atomicTerm("assembled", "o - Material", "b - Boolean"),
                 atomicTerm("tested", "o - Material", "b - Boolean"),
-                atomicTerm("packed", "o - Material", "b - Boolean")]
+                atomicTerm("packed", "o - Material", "b - Boolean"),
+                atomicTerm("status", "o - Service", "b - State")]
 
 # strips: strips style
 # equality: "=" as built-in predicate

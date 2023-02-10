@@ -82,6 +82,8 @@ def getFormula(f):
         res += "(" + l[0] +  " " + "?srv" + " " + "?" + l[1] + ")" + " "
     res = res.replace("?true","true")
     res = res.replace("?false","false")
+    res = res.replace("?available","available")
+    res = res.replace("?broken","broken")
     return res
 
 def getNegativeFormula(f):
@@ -95,6 +97,8 @@ def getNegativeFormula(f):
         res += "(not(" + l[0] +  " " + "?srv" + " " + "?" + l[1] + "))" + " "
     res = res.replace("?true","true")
     res = res.replace("?false","false")
+    res = res.replace("?available","available")
+    res = res.replace("?broken","broken")
     return res
 
 def getActions(tasks):
