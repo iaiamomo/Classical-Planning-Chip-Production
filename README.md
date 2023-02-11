@@ -4,13 +4,19 @@ Implementation a tool to compose Industrial APIs via Planning techniques.
 
 ## Preliminaries
 
-- Setup the environment
+Clone the repository:
+```sh
+git clone --recurive-submodules https://github.com/iaiamomo/IAPIsPLAN.git
+cd IAPIsPLAN
+```
+
+Then, setup the environment (install [miniconda](https://docs.conda.io/projects/conda/en/stable/user-guide/install/index.html#installing-conda-on-a-system-that-has-other-python-installations-or-packages)):
 ```sh
 conda env create -f environment.yml
 conda activate py3
 ```
 
-- Build [Fast Downward](https://github.com/aibasel/downward) software
+Finally, build [Fast Downward](https://github.com/aibasel/downward) planner:
 ```sh
 cd downward
 ./build.py
