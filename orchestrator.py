@@ -8,15 +8,18 @@ import requests
 from actorsAPI import *
 
 
-async def executionEngine():
+async def executionEngine(rnd):
     # Retrieve information of Things and construct PDDL domain and problem files
     print("Collecting problem data...")
     desc = buildPDDL()
+
+    input("press enter to continue...")
     
     # Call planner
     # If plan not found, return 2 
     print("Invoking planner...")
     command = "./downward/fast-downward.py " + config.PDDL["domainFile"] + " " + config.PDDL["problemFile"] + " " + "--search " + '"astar(lmcut())"' 
+    #command = f'./downward/fast-downward.py --sas-plan sas_plan_{rnd} {config.PDDL["domainFile"]} {config.PDDL["domainFile"]} {config.PDDL["problemFile"]} --search /"astar(lmcut())"'
     result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
     print(f"result planner: {result.returncode}")
     if (result.returncode > 9):
@@ -62,11 +65,11 @@ async def executionEngine():
                 return 1
     return 0
 
-
-result = asyncio.get_event_loop().run_until_complete(executionEngine())
+rnd = 1
+result = asyncio.get_event_loop().run_until_complete(executionEngine(rnd))
 while result == 1:
-    result = asyncio.get_event_loop().run_until_complete(executionEngine())
-
+    input("press enter to continue...")
+    result = asyncio.get_event_loop().run_until_complete(executionEngine(rnd+1))
 
 if result == 0:
     print("Success!")
