@@ -7,8 +7,10 @@ from config import *
 import requests
 from actorsAPI import *
 
+rnd = 0
+total_cost = 0
 
-async def executionEngine(rnd):
+async def executionEngine(rnd, tot_cost):
     # Retrieve information of Things and construct PDDL domain and problem files
     print("Collecting problem data...")
     desc = buildPDDL()
@@ -19,11 +21,10 @@ async def executionEngine(rnd):
     # If plan not found, return 2 
     print("Invoking planner...")
     command = "./downward/fast-downward.py " + config.PDDL["domainFile"] + " " + config.PDDL["problemFile"] + " " + "--search " + '"astar(lmcut())"' 
-    #command = f'./downward/fast-downward.py --sas-plan sas_plan_{rnd} {config.PDDL["domainFile"]} {config.PDDL["domainFile"]} {config.PDDL["problemFile"]} --search /"astar(lmcut())"'
     result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
     print(f"result planner: {result.returncode}")
     if (result.returncode > 9):
-        return 2
+        return [2, tot_cost]
             
     print("Plan found! Proceeding to orchestrate devices...")
     with open(config.PDDL["planFile"]) as file_in:
@@ -51,10 +52,12 @@ async def executionEngine(rnd):
                     response = sendMessage(serviceId, body)
                 except requests.exceptions.Timeout:
                     print("Expired timer! Adapting...")
-                    return 1
+                    return [1, tot_cost]
                 event = json.loads(response.content)
+                print(event)
                 value = event["value"]
                 output = event["output"]
+                cost = event["cost"]
 
                 if value == "terminated":
                     break
@@ -62,17 +65,21 @@ async def executionEngine(rnd):
             print("Received output: " + str(output))
             if output != expected:
                 print("Discrepancy detected! Adapting...")
-                return 1
-    return 0
+                return [1, tot_cost]
+            else:
+                tot_cost += cost
+                print("total cost: " + str(tot_cost))
+            
+    return [0, tot_cost]
 
-rnd = 1
-result = asyncio.get_event_loop().run_until_complete(executionEngine(rnd))
+result, total_cost = asyncio.get_event_loop().run_until_complete(executionEngine(rnd, total_cost))
 while result == 1:
     input("press enter to continue...")
-    result = asyncio.get_event_loop().run_until_complete(executionEngine(rnd+1))
+    result, total_cost = asyncio.get_event_loop().run_until_complete(executionEngine(rnd+1, total_cost))
 
 if result == 0:
     print("Success!")
+    print("Total cost: " + str(total_cost))
 else:
     print("Plan not found!")
                 
