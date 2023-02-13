@@ -1,22 +1,42 @@
-FROM python:3
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
 
 WORKDIR /home/default
 
+RUN apt-get update &&\
+    apt-get install -y \
+        python3 \
+        python3-pip \
+        git \
+        cmake \
+        lsof \
+        sudo \
+        less \
+        wget &&\
+    apt-get clean &&\
+    rm -rf /var/cache
+
 RUN git clone https://username:password@github.com/iaiamomo/IAPIsPLAN.git &&\
-    cd IAPIsPLAN
+    cd /home/default/IAPIsPLAN
 
 COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN git clone https://github.com/aibasel/downward.git &&\
+COPY . .
+
+RUN rm -rf /home/default/IAPIsPLAN/downward &&\
+    rm -rf /home/default/IAPIsPLAN/IndustrialAPIs &&\
+    cd /home/default/IAPIsPLAN &&\
+    git clone https://github.com/aibasel/downward.git &&\
     git clone https://github.com/iaiamomo/IndustrialAPIs.git &&\
-    cd downward &&\
+    cd /home/default/IAPIsPLAN/downward &&\
     ./build.py &&\
-    cd ../actors_api_plan/open_client_script &&\
+    cd /home/default/IAPIsPLAN/IndustrialAPIs/actors_api_plan/openapi_client_script &&\
     ./generate-openapi-client.sh &&\
-    cd ../..
+    cd /home/default/IAPIsPLAN
 
-RUN chmod a+x run_apis.sh
-
-CMD ["./run_apis.sh"]
+EXPOSE 8080 8765
