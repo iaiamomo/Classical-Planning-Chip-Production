@@ -6,7 +6,7 @@ Implementation a tool to compose Industrial APIs via Planning techniques.
 
 Clone the repository:
 ```sh
-git clone --recurive-submodules https://github.com/iaiamomo/IAPIsPLAN.git
+git clone --recursive-submodules https://github.com/iaiamomo/IAPIsPLAN.git
 cd IAPIsPLAN
 ```
 
