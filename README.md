@@ -29,7 +29,7 @@ cd downward
 
 2. Generate Python client from OpenAPI v3.0 specification:
 ```sh
-cd actors_api_plan/open_client_script
+cd actors_api_plan/openapi_client_script
 ./generate-openapi-client.sh
 ```
 
