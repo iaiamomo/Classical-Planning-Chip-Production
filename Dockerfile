@@ -19,24 +19,18 @@ RUN apt-get update &&\
     apt-get clean &&\
     rm -rf /var/cache
 
-RUN git clone https://username:password@github.com/iaiamomo/IAPIsPLAN.git &&\
-    cd /home/default/IAPIsPLAN
+RUN git clone --recurse-submodules https://username:password@github.com/iaiamomo/IAPIsPLAN.git
 
 COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+WORKDIR /home/default/IAPIsPLAN
 
-RUN rm -rf /home/default/IAPIsPLAN/downward &&\
-    rm -rf /home/default/IAPIsPLAN/IndustrialAPIs &&\
-    cd /home/default/IAPIsPLAN &&\
-    git clone https://github.com/aibasel/downward.git &&\
-    git clone https://github.com/iaiamomo/IndustrialAPIs.git &&\
-    cd /home/default/IAPIsPLAN/downward &&\
+RUN cd /home/default/IAPIsPLAN/downward &&\
     ./build.py &&\
     cd /home/default/IAPIsPLAN/IndustrialAPIs/actors_api_plan/openapi_client_script &&\
-    ./generate-openapi-client.sh &&\
-    cd /home/default/IAPIsPLAN
+    chmod +x generate-openapi-client.sh &&\
+    ./generate-openapi-client.sh
 
 EXPOSE 8080 8765
