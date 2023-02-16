@@ -2,7 +2,9 @@
 
 Implementation a tool to compose Industrial APIs via Planning techniques.
 
-## Preliminaries
+## Use the source code
+
+### Preliminaries
 
 Clone the repository:
 ```sh
@@ -23,7 +25,7 @@ cd downward
 ```
 
 
-## How to run the code
+### How to run the code
 
 1. Put the descriptions of the industral actors inside [device_descriptions](https://github.com/iaiamomo/IndustrialAPIs/tree/main/actors_api_plan/device_descriptions) folder (refer to [template](https://github.com/iaiamomo/IndustrialAPIs/blob/main/README.md#industrial-apis)).
 
@@ -51,3 +53,35 @@ python launch_devices.py
 ```sh
 python orchestrator.py
 ```
+
+
+## Use the Docker image
+
+### Preliminaries
+
+Build an image from the [Dockerfile](Dockerfile):
+```sh
+docker build -t orchestrator .
+```
+
+Run a new container from the image created:
+```sh
+docker run -it --network host orchestrator bash
+```
+
+Get the ``CONTAINER ID`` of the running container with:
+```sh
+docker ps
+```
+
+
+### How to run the code
+
+1. Open three terminals in a running container executing three times:
+```sh
+docker exec -it <CONTAINER_ID> bash
+```
+
+2. Then, follow the instructions listed in the previous section.
+
+N.B. Use ``python3`` instead of ``python`` when launching components.
