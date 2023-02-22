@@ -46,14 +46,15 @@ def getObjects(instances, tasks):  #{"Object":["ball","box"]}
     for t in tasks:
         if t.providedBy in services:
             continue
-        res += t.providedBy + " - " + "Service" + "\n"
+        #res += t.providedBy + " - " + "Service" + "\n"
+        res += t.providedBy + " - " + t.serviceType + "\n"
         services.append(t.providedBy)
         
     res += ")\n"
 
     return res
 
-def getTypes(instances):
+def getTypes(instances, subtypes_service):
     res = "(:types \nService - Thing\nCapability\n"
 
     subtype_object = context.types["Object"]
@@ -66,6 +67,10 @@ def getTypes(instances):
                 res += k + " - " + "Object" + "\n"
                 continue
         res += k + "\n"
+    if len(subtypes_service) > 0:
+        for k in subtypes_service:
+            res += k + " "
+        res += "- " + "Service" + "\n"
 
     res += ")\n"
 
@@ -109,7 +114,8 @@ def getActions(tasks):
             continue
         names.append(t.name)
         
-        params = ":parameters (?srv - " + "Service"
+        #params = ":parameters (?srv - " + "Service"
+        params = ":parameters (?srv - " + t.serviceType
         for p in t.params:
             params += " " + "?" + \
                       p.strip().split(" - ")[1] + " - " + \

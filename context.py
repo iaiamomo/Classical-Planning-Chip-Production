@@ -36,7 +36,7 @@ atomicTerms = [ atomicTerm("taken", "o - Design", "b - Boolean"),
 # strips: strips style
 # equality: "=" as built-in predicate
 # typing: allow types names in declaration of variables
-requirements = ["strips", "equality", "typing"]#, "action-costs"]
+requirements = ["strips", "equality", "typing"]
 
 # plan goal
 goal = [groundAtomicTerm("packed", "wafer", "true")]

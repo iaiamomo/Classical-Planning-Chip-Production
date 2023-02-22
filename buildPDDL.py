@@ -17,6 +17,8 @@ def buildPDDL():
     goal = context.goal
     requirements = context.requirements
 
+    subtypes_service = []
+
     for service in servicesAPI:
         s = service["id"]
         services.append(s)
@@ -30,7 +32,8 @@ def buildPDDL():
             value = feature["properties"]["value"]
             groundAtomicTerms.append(groundAtomicTerm(f,s,value))
 
-        if serviceType == "Service":        
+        if "Service" in serviceType:
+            subtypes_service.append(serviceType)       
             actions = attributes["actions"]
             for a in actions:
                 action = actions[a]
@@ -74,12 +77,13 @@ def buildPDDL():
                                 delEff,
                                 providedBy,
                                 a,
-                                cost
+                                cost,
+                                serviceType
                                 )
                     tasks.append(task)
                 
     desc = Description(services,capabilities,
-                       instances,tasks,atomicTerms,
+                       instances,subtypes_service,tasks,atomicTerms,
                        groundAtomicTerms)
 
     domainFile = open(config.PDDL["domainFile"], 'w+')

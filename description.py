@@ -2,11 +2,12 @@ from PDDLUtils import *
 
 class Description:
     def __init__(self,services,capabilities,
-                 instances,tasks,
+                 instances,subtypes_service,tasks,
                  atomicTerms,groundAtomicTerms):
         self.services = services
         self.capabilities = capabilities
         self.instances = instances
+        self.subtypes_service = subtypes_service
         self.tasks = tasks
         self.atomicTerms = atomicTerms
         self.groundAtomicTerms = groundAtomicTerms
@@ -15,7 +16,7 @@ class Description:
         res = "(define" + " " + "(domain" + " " \
               + domainName + ")" + "\n"
         res += getRequirements(requirements)
-        res += getTypes(self.instances)
+        res += getTypes(self.instances, self.subtypes_service)
         res += getPredicates(self.atomicTerms)
         #cost
         res += "(:functions (total-cost))" + "\n"
@@ -108,7 +109,7 @@ class Description:
 class Task:
     def __init__(self, name, params,\
                  posPrec, negPrec, addEff,\
-                 delEff,providedBy, capability, cost):
+                 delEff,providedBy, capability, cost, serviceType):
         self.name = name             #"move"
         self.params = params         #["Location - from", "Location - to"]
         self.posPrec = posPrec       #["o.at:from"]
@@ -118,6 +119,7 @@ class Task:
         self.providedBy = providedBy  # "rb1"
         self.capability = capability  # "movement"
         self.cost = cost
+        self.serviceType = serviceType
 
     def getGroundedEffect(self, inp):
         
