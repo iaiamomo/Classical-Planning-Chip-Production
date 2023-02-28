@@ -1,0 +1,18 @@
+{
+    "id": "phosphor",
+    "attributes": {
+        "type": "PhosphorMaterial"
+    },
+    "features": {
+        "taken": {
+            "properties": {
+                "value": "false"
+            }
+        },
+        "implanted": {
+            "properties": {
+                "value": "false"
+            }
+        }
+    }
+}

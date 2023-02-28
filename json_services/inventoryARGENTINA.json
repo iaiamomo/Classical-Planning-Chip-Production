@@ -1,0 +1,40 @@
+{
+    "id": "inventoryargentina",
+    "attributes": {
+        "type": "Service_inv_ar",
+        "actions": {
+            "taking_boron": {
+                "properties": {
+                    "type": "operation",
+                    "command": "take_boron_ar",
+                    "cost": 8,
+                    "parameters": [
+                        "Design - d",
+                        "BoronMaterial - b"
+                    ],
+                    "requirements": {
+                        "positive": [
+                            "d.taken:true",
+                            "b.taken:false"
+                        ]
+                    },
+                    "effects": {
+                        "added": [
+                            "b.taken:true"
+                        ],
+                        "deleted": [
+                            "b.taken:false"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "features": {
+        "status":{
+            "properties": {
+                "value": "available"
+            }
+        }
+    }
+}

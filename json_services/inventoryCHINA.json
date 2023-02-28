@@ -1,0 +1,90 @@
+{
+    "id": "inventorychina",
+    "attributes": {
+        "type": "Service_inv_cn",
+        "actions": {
+            "taking_boron": {
+                "properties": {
+                    "type": "operation",
+                    "command": "take_boron_cn",
+                    "cost": 11,
+                    "parameters": [
+                        "Design - d",
+                        "BoronMaterial - b"
+                    ],
+                    "requirements": {
+                        "positive": [
+                            "d.taken:true",
+                            "b.taken:false"
+                        ]
+                    },
+                    "effects": {
+                        "added": [
+                            "b.taken:true"
+                        ],
+                        "deleted": [
+                            "b.taken:false"
+                        ]
+                    }
+                }
+            },
+            "taking_silicon": {
+                "properties": {
+                    "type": "operation",
+                    "command": "take_silicon_ch",
+                    "cost": 11,
+                    "parameters": [
+                        "Design - d",
+                        "SiliconMaterial - s"
+                    ],
+                    "requirements": {
+                        "positive": [
+                            "d.taken:true",
+                            "s.taken:false"
+                        ]
+                    },
+                    "effects": {
+                        "added": [
+                            "s.taken:true"
+                        ],
+                        "deleted": [
+                            "s.taken:false"
+                        ]
+                    }
+                }
+            },
+            "taking_phosphor": {
+                "properties": {
+                    "type": "operation",
+                    "command": "take_phosphor_ch",
+                    "cost": 11,
+                    "parameters": [
+                        "Design - d",
+                        "PhosphorMaterial - p"
+                    ],
+                    "requirements": {
+                        "positive": [
+                            "d.taken:true",
+                            "p.taken:false"
+                        ]
+                    },
+                    "effects": {
+                        "added": [
+                            "p.taken:true"
+                        ],
+                        "deleted": [
+                            "p.taken:false"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "features": {
+        "status":{
+            "properties": {
+                "value": "available"
+            }
+        }
+    }
+}

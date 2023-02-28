@@ -1,0 +1,40 @@
+{
+    "id": "inventorykazakhstan",
+    "attributes": {
+        "type": "Service_inv_kz",
+        "actions": {
+            "taking_boron": {
+                "properties": {
+                    "type": "operation",
+                    "command": "take_boron_kz",
+                    "cost": 10,
+                    "parameters": [
+                        "Design - d",
+                        "BoronMaterial - b"
+                    ],
+                    "requirements": {
+                        "positive": [
+                            "d.taken:true",
+                            "b.taken:false"
+                        ]
+                    },
+                    "effects": {
+                        "added": [
+                            "b.taken:true"
+                        ],
+                        "deleted": [
+                            "b.taken:false"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "features": {
+        "status":{
+            "properties": {
+                "value": "available"
+            }
+        }
+    }
+}
