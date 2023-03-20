@@ -3,26 +3,27 @@ from actorsAPI import *
 import config
 import context
 
-def buildPDDL(phase):
+def buildPDDL(phase, domain, problem):
     servicesAPI = searchServices()
 
     services = [] 
     capabilities = [] 
-    instances = context.instances 
     tasks = [] 
-    atomicTerms = context.atomicTerms
-    #groundAtomicTerms = context.groundAtomicTerms
     groundAtomicTerms = []
-
+    
     if phase == 1:
         goal = context.goal_phase1
-        requirements = context.requirements_phase1
+        atomicTerms = context.atomicTerms_phase1
+        instances = context.instances_phase1
     elif phase == 2:
         goal = context.goal_phase2
-        requirements = context.requirements_phase2
+        atomicTerms = context.atomicTerms_phase2
+        instances = context.instances_phase2
     else:
         goal = context.goal
-        requirements = context.requirements
+        atomicTerms = context.atomicTerms
+        instances = context.instances
+    requirements = context.requirements
 
     subtypes_service = []
 
@@ -93,12 +94,15 @@ def buildPDDL(phase):
                        instances,subtypes_service,tasks,atomicTerms,
                        groundAtomicTerms)
 
-    domainFile = open(config.PDDL["domainFile"], 'w+')
-    domainFile.write(desc.getPDDLDomain(config.PDDL["domainName"],requirements))
+    domain_name = domain[:domain.rfind(".")]
+    problem_name = problem[:problem.rfind(".")]
+
+    domainFile = open(f"{domain}", 'w+')
+    domainFile.write(desc.getPDDLDomain(domain_name,requirements))
     domainFile.close()
 
-    problemFile = open(config.PDDL["problemFile"], 'w+')
-    problemFile.write(desc.getPDDLProblem(config.PDDL["domainName"],config.PDDL["problemName"],goal))
+    problemFile = open(f"{problem}", 'w+')
+    problemFile.write(desc.getPDDLProblem(domain_name,problem_name,goal))
     problemFile.close()
 
     return desc

@@ -1,12 +1,29 @@
 from translator import *
 
-instances = {   "Design":["design"],
-                "BoronMaterial":["boron"],
-                "PhosphorMaterial":["phosphor"],
-                "SiliconMaterial":["silicon"],
-                "Material":["wafer"],
-                "Boolean":["true","false"],
-                "State":["available","broken"]}
+instances_phase1 = {"Design":["design"],
+                    "BoronMaterial":["boron"],
+                    "PhosphorMaterial":["phosphor"],
+                    "SiliconMaterial":["silicon"],
+                    "AluminumMaterial":["aluminum"],
+                    "ResistMaterial":["resist"],
+                    "PlasticMaterial":["plastic"],
+                    "ChemicalsMaterial":["chemicals"],
+                    "CopperMaterial":["copper"],
+                    "Material":["wafer"],
+                    "Boolean":["true","false"],
+                    "State":["available","broken"]}
+
+instances_phase2 = {"BoronMaterial":["boron"],
+                    "PhosphorMaterial":["phosphor"],
+                    "SiliconMaterial":["silicon"],
+                    "AluminumMaterial":["aluminum"],
+                    "ResistMaterial":["resist"],
+                    "PlasticMaterial":["plastic"],
+                    "ChemicalsMaterial":["chemicals"],
+                    "CopperMaterial":["copper"],
+                    "Material":["wafer"],
+                    "Boolean":["true","false"],
+                    "State":["available","broken"]}
 
 types = { "Object": [] }
 
@@ -20,9 +37,10 @@ atomicTerms_phase1 = [  atomicTerm("taken", "o - Design", "b - Boolean"),
                         atomicTerm("taken", "o - PlasticMaterial", "b - Boolean"),
                         atomicTerm("taken", "o - ChemicalsMaterial", "b - Boolean"),
                         atomicTerm("taken", "o - CopperMaterial", "b - Boolean"),
-                        atomicTerm("taken", "o - Material", "b - Boolean")]
+                        atomicTerm("taken", "o - Material", "b - Boolean"),
+                        atomicTerm("status", "o - Service", "b - State")]
 
-atomicTerm_phase2 = [   atomicTerm("cleaned", "o - Material", "b - Boolean"),
+atomicTerms_phase2 = [  atomicTerm("cleaned", "o - Material", "b - Boolean"),
                         atomicTerm("deposited", "o - Material", "b - Boolean"),
                         atomicTerm("deposited", "o - SiliconMaterial", "b - Boolean"), 
                         atomicTerm("deposited", "o - AluminumMaterial", "b - Boolean"),
@@ -52,7 +70,7 @@ atomicTerm_phase2 = [   atomicTerm("cleaned", "o - Material", "b - Boolean"),
 requirements = ["strips", "equality", "typing"]
 
 # plan goal
-goal_phase1 = [ groundAtomicTerm("taken", "wafer", "true"), 
+goal_phase1 = [ groundAtomicTerm("taken", "design", "true"),
                 groundAtomicTerm("taken", "boron", "true"),
                 groundAtomicTerm("taken", "phosphor", "true"),
                 groundAtomicTerm("taken", "silicon", "true"),
