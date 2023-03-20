@@ -3,7 +3,7 @@ from actorsAPI import *
 import config
 import context
 
-def buildPDDL():
+def buildPDDL(phase):
     servicesAPI = searchServices()
 
     services = [] 
@@ -14,8 +14,15 @@ def buildPDDL():
     #groundAtomicTerms = context.groundAtomicTerms
     groundAtomicTerms = []
 
-    goal = context.goal
-    requirements = context.requirements
+    if phase == 1:
+        goal = context.goal_phase1
+        requirements = context.requirements_phase1
+    elif phase == 2:
+        goal = context.goal_phase2
+        requirements = context.requirements_phase2
+    else:
+        goal = context.goal
+        requirements = context.requirements
 
     subtypes_service = []
 

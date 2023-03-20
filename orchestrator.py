@@ -10,6 +10,10 @@ from actorsAPI import *
 rnd = 0
 total_cost = 0
 
+config_json = json.load(open('config.json', 'r'))
+mode = config['mode']
+phase = config['phase']
+
 async def executionEngine(rnd, tot_cost):
     # Retrieve information of Things and construct PDDL domain and problem files
     print("Collecting problem data...")
