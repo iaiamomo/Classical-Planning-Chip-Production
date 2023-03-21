@@ -31,6 +31,8 @@ RUN cd /home/default/IAPIsPLAN/downward &&\
     ./build.py &&\
     cd /home/default/IAPIsPLAN/IndustrialAPIs/actors_api_plan/openapi_client_script &&\
     chmod +x generate-openapi-client.sh &&\
-    ./generate-openapi-client.sh
+    ./generate-openapi-client.sh &&\
+    cd /home/default &&\
+    mkdir -p /home/default/results
 
 EXPOSE 8080 8765
