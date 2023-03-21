@@ -15,6 +15,8 @@ RUN apt-get update &&\
         lsof \
         sudo \
         less \
+        nano \
+        vim \
         wget &&\
     apt-get clean &&\
     rm -rf /var/cache
