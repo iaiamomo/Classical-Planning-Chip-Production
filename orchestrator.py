@@ -39,7 +39,7 @@ async def executionEngine(rnd, tot_cost):
     print("Collecting problem data...")
     desc = buildPDDL(phase, domain, problem)
 
-    input("press enter to continue...")
+    #input("press enter to continue...")
     
     # Call planner
     # If plan not found, return 2 
@@ -117,7 +117,7 @@ async def executionEngine(rnd, tot_cost):
 
 result, total_cost = asyncio.get_event_loop().run_until_complete(executionEngine(rnd, total_cost))
 while result == 1:
-    input("press enter to continue...")
+    #input("press enter to continue...")
     result, total_cost = asyncio.get_event_loop().run_until_complete(executionEngine(rnd+1, total_cost))
 
 if result == 0:
