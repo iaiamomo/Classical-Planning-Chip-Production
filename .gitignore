@@ -2,8 +2,8 @@
 profiling*.txt
 sas_plan
 
-!results/*/*.txt
-!results/*/*.pddl
+!experimental_results/*/*.txt
+!experimental_results/*/*.pddl
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
