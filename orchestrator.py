@@ -63,7 +63,7 @@ async def executionEngine(rnd, tot_cost):
         file_name = f'profiling_phase{phase}_{size}.txt'
     with open(file_name, 'w+') as f:
         #f.write(s.getvalue())
-        f.write(f"elapsed time: {elapsed}")
+        f.write(f"elapsed time: {elapsed}\n")
     
     print(f"result planner: {result.returncode}")
     if (result.returncode > 9):
