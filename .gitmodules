@@ -3,4 +3,4 @@
 	url = https://github.com/aibasel/downward.git
 [submodule "IndustrialAPIs"]
 	path = IndustrialAPIs
-	url = https://github.com/iaiamomo/IndustrialAPIs.git
+	url = https://github.com/username/IndustrialAPIs.git
