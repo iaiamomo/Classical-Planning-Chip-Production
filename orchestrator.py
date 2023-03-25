@@ -46,24 +46,15 @@ async def executionEngine(rnd, tot_cost):
     print("Invoking planner...")
 
     now = time.time_ns()
-    #pr = cProfile.Profile()
-    #pr.enable()
-    #command = f"./downward/fast-downward.py {config.PDDL['domainName']}_phase{phase}.pddl {config.PDDL['problemName']}_phase{phase}.pddl --search 'astar(lmcut())'" 
-    #result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
     result = execute_downward(domain, problem)
-    #pr.disable()
     elapsed = time.time_ns() - now
-    print(f"elapsed time: {elapsed}")
-    #s = io.StringIO()
-    #ps = pstats.Stats(pr, stream=s).sort_stats('cumtime')
-    #ps.print_stats()
+    print(f"elapsed time: {elapsed} ns")
     if phase == 1:
         file_name = f'profiling_phase{phase}.txt'
     elif phase == 2:
         file_name = f'profiling_phase{phase}_{size}.txt'
     with open(file_name, 'w+') as f:
-        #f.write(s.getvalue())
-        f.write(f"elapsed time: {elapsed}\n")
+        f.write(f"elapsed time: {elapsed} ns\n")
     
     print(f"result planner: {result.returncode}")
     if (result.returncode > 9):
