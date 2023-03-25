@@ -21,7 +21,7 @@ RUN apt-get update &&\
     apt-get clean &&\
     rm -rf /var/cache
 
-RUN git clone --recurse-submodules https://username:password@github.com/iaiamomo/IAPIsPLAN.git
+RUN git clone --recurse-submodules https://username:password@github.com/username/IAPIsPLAN.git
 
 COPY requirements.txt ./
 
