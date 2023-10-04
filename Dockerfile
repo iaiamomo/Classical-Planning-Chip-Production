@@ -25,19 +25,19 @@ COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /home/default/AIDA_PlanningCONT
+WORKDIR /home/default/experiments
 
-RUN git clone https://github.com/iaiamomo/AIDA_PlanningCONT.git &&\
-    cd /home/default/AIDA_PlanningCONT &&\
+RUN git clone https://github.com/iaiamomo/Classical-Planning-Chip-Production.git &&\
+    cd /home/default/experiments/Classical-Planning-Chip-Production &&\
     git clone https://github.com/iaiamomo/IndustrialAPI.git &&\
     git clone https://github.com/aibasel/downward.git
 
-RUN cd /home/default/AIDA_PlanningCONT/downward &&\
+RUN cd /home/default/experiments/Classical-Planning-Chip-Production/downward &&\
     ./build.py &&\
-    cd /home/default/AIDA_PlanningCONT/IndustrialAPIs/actors_api_plan/openapi_client_script &&\
+    cd /home/default/experiments/Classical-Planning-Chip-Production/IndustrialAPI/actors_api_plan/openapi_client_script &&\
     chmod +x generate-openapi-client.sh &&\
     ./generate-openapi-client.sh &&\
-    cd /home/default &&\
-    mkdir -p /home/default/results
+    cd /home/default/experiments &&\
+    mkdir -p /home/default/experiments/results
 
 EXPOSE 8080 8765

@@ -16,7 +16,7 @@ from memory_profiler import profile
 rnd = 0
 total_cost = 0
 
-config_json = json.load(open('IndustrialAPIs/config.json', 'r'))
+config_json = json.load(open('IndustrialAPI/config.json', 'r'))
 mode = config_json['mode']
 phase = config_json['phase']
 size = config_json['size']

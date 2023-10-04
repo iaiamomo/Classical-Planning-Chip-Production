@@ -8,8 +8,8 @@ Implementation a tool to compose Industrial API via planning techniques.
 
 Clone the repository, the Industrial API platform and [Fast Downward](https://github.com/aibasel/downward) planner:
 ```sh
-git clone https://github.com/iaiamomo/AIDA_PlanningCONT.git
-cd AIDA_PlanningCONT
+git clone https://github.com/iaiamomo/Classical-Planning-Chip-Production.git
+cd Classical-Planning-Chip-Production
 git clone https://github.com/iaiamomo/IndustrialAPI.git
 git clone https://github.com/aibasel/downward.git
 ```
@@ -63,12 +63,12 @@ python controller.py
 
 Build an image from the [Dockerfile](Dockerfile):
 ```sh
-docker build -t orchestrator .
+docker build -t controller .
 ```
 
 Run a new container from the image created:
 ```sh
-docker run -it --network host orchestrator bash
+docker run -it --network host controller bash
 ```
 
 Get the ``CONTAINER ID`` of the running container with:
