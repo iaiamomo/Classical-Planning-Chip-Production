@@ -21,17 +21,20 @@ RUN apt-get update &&\
     apt-get clean &&\
     rm -rf /var/cache
 
-RUN git clone --recurse-submodules https://username:password@github.com/username/IAPIsPLAN.git
-
 COPY requirements.txt ./
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /home/default/IAPIsPLAN
+WORKDIR /home/default/AIDA_PlanningCONT
 
-RUN cd /home/default/IAPIsPLAN/downward &&\
+RUN git clone https://github.com/iaiamomo/AIDA_PlanningCONT.git &&\
+    cd /home/default/AIDA_PlanningCONT &&\
+    git clone https://github.com/iaiamomo/IndustrialAPI.git &&\
+    git clone https://github.com/aibasel/downward.git
+
+RUN cd /home/default/AIDA_PlanningCONT/downward &&\
     ./build.py &&\
-    cd /home/default/IAPIsPLAN/IndustrialAPIs/actors_api_plan/openapi_client_script &&\
+    cd /home/default/AIDA_PlanningCONT/IndustrialAPIs/actors_api_plan/openapi_client_script &&\
     chmod +x generate-openapi-client.sh &&\
     ./generate-openapi-client.sh &&\
     cd /home/default &&\
