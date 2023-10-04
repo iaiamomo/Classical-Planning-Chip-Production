@@ -53,7 +53,7 @@ python launch_devices.py
 
 4. Start the controller:
 ```sh
-python orchestrator.py
+python controller.py
 ```
 
 
