@@ -3,8 +3,47 @@
 Implementation a tool to compose Industrial API via planning techniques.
 
 ## How to replicate the experiments
+The experiments can be replicated using either docker or from source code.
 
-### Preliminaries
+### Use the Docker image
+
+#### Preliminaries
+
+Build the image from the [Dockerfile](Dockerfile):
+```sh
+docker build -t controller .
+```
+
+Run a new container from the image created:
+```sh
+docker run -it --network host controller bash
+```
+
+Get the ``CONTAINER ID`` of the running container with:
+```sh
+docker ps
+```
+
+#### Run the Orchestrator
+
+1. Open **3** terminals in a running container executing three times:
+```sh
+docker exec -it <CONTAINER_ID> bash
+```
+
+2. Then, run the Industrial API server, launch the manufacturing actor services and start the controller.
+```sh
+cd IndustrialAPI
+python app.py   # 1° term: Industrial API server
+python launch_devices.py    # 2° term: manufacturing services
+python controller.py    # 3° term: controller
+```
+
+
+
+### From the source code
+
+#### Preliminaries
 
 Clone the repository, the Industrial API platform and [Fast Downward](https://github.com/aibasel/downward) planner:
 ```sh
@@ -26,8 +65,7 @@ cd downward
 ./build.py
 ```
 
-
-### Run the Orchestrator
+#### Run the Orchestrator
 
 - The configuration file [conf.json](https://github.com/iaiamomo/IndustrialAPI/tree/main/conf.json) contains the basic information needed to run the platform. The JSON key <code>mode</code> accept only the value <code>plan</code>, the key <code>phase</code> accepts <code>[1,2]</code> values (representing the assortment and manufacturing phases respectively), and the key <code>size</code> accepts <code>[small, manageable1, manageable2, complex]</code> values (related to the number of involved services).
 - [actors_api_plan](https://github.com/iaiamomo/IndustrialAPI/tree/main/actors_api_plan) contains the description of the manufacturing actors.
@@ -45,7 +83,7 @@ cd IndustrialAPI
 python app.py
 ```
 
-3. Then, run the Industrial API:
+3. Then, run the manufacturing actor services:
 ```sh
 cd IndustrialAPIs
 python launch_devices.py
@@ -55,35 +93,3 @@ python launch_devices.py
 ```sh
 python controller.py
 ```
-
-
-## Use the Docker image
-
-### Preliminaries
-
-Build an image from the [Dockerfile](Dockerfile):
-```sh
-docker build -t controller .
-```
-
-Run a new container from the image created:
-```sh
-docker run -it --network host controller bash
-```
-
-Get the ``CONTAINER ID`` of the running container with:
-```sh
-docker ps
-```
-
-
-### How to run the code
-
-1. Open three terminals in a running container executing three times:
-```sh
-docker exec -it <CONTAINER_ID> bash
-```
-
-2. Then, follow the instructions listed in the previous section.
-
-N.B. Use ``python3`` instead of ``python`` when launching components.
