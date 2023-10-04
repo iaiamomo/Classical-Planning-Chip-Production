@@ -1,6 +1,6 @@
-# Industrial API composition via Planning techinques
+# Industrial API composition via Planning techinques - Chip Supply Chain case study
 
-Implementation a tool to compose Industrial API via Planning techniques.
+Implementation a tool to compose Industrial API via planning techniques.
 
 ## How to replicate the experiments
 
