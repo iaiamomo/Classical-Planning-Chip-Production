@@ -3,7 +3,7 @@
 Implementation a tool to compose Industrial API via planning techniques.
 
 ## How to replicate the experiments
-The experiments can be replicated using either docker or from source code.
+The experiments can be replicated either by using docker or run it from source code.
 
 ### Use the Docker image
 
@@ -33,11 +33,18 @@ docker exec -it <CONTAINER_ID> bash
 
 2. Then, run the Industrial API server, launch the manufacturing actor services and start the controller.
 ```sh
-cd IndustrialAPI
-python app.py   # 1° term: Industrial API server
-python launch_devices.py    # 2° term: manufacturing services
-python controller.py    # 3° term: controller
+# 1° term: Industrial API server
+cd Classical-Planning-Chip-Production/IndustrialAPI
+python app.py
+# 2° term: manufacturing services
+cd Classical-Planning-Chip-Production/IndustrialAPI
+python launch_devices.py
+# 3° term: controller
+cd Classical-Planning-Chip-Production
+python controller.py    
 ```
+
+3. To shut-down the services please press ``Ctrl + C`` in the 1° terminal.
 
 
 
@@ -67,7 +74,7 @@ cd downward
 
 #### Run the Orchestrator
 
-- The configuration file [conf.json](https://github.com/iaiamomo/IndustrialAPI/tree/main/conf.json) contains the basic information needed to run the platform. The JSON key <code>mode</code> accept only the value <code>plan</code>, the key <code>phase</code> accepts <code>[1,2]</code> values (representing the assortment and manufacturing phases respectively), and the key <code>size</code> accepts <code>[small, manageable1, manageable2, complex]</code> values (related to the number of involved services).
+- The configuration file [conf.json](https://github.com/iaiamomo/IndustrialAPI/tree/main/conf.json) contains the basic information needed to run the platform. The JSON key ``mode`` accept only the value ``plan``, the key ``phase`` accepts ``[1,2]`` values (representing the assortment and manufacturing phases respectively), and the key ``size`` accepts ``[small, manageable1, manageable2, complex]`` values (related to the number of involved services).
 - [actors_api_plan](https://github.com/iaiamomo/IndustrialAPI/tree/main/actors_api_plan) contains the description of the manufacturing actors.
 - [context.py](context.py) contains the contextual information.
 
