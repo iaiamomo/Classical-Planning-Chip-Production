@@ -1,6 +1,6 @@
 # Industrial API composition via Planning techinques - Chip Supply Chain case study
 
-Implementation a tool to compose Industrial API via planning techniques.
+Implementation a tool to compose [Industrial API](https://github.com/iaiamomo/IndustrialAPI) via planning techniques.
 
 ## How to replicate the experiments
 The experiments can be replicated either by using docker or run it from source code.
@@ -52,7 +52,7 @@ python controller.py
 
 #### Preliminaries
 
-Clone the repository, the Industrial API platform and [Fast Downward](https://github.com/aibasel/downward) planner:
+Clone the repository, the [Industrial API platform](https://github.com/iaiamomo/IndustrialAPI) and [Fast Downward](https://github.com/aibasel/downward) planner:
 ```sh
 git clone https://github.com/iaiamomo/Classical-Planning-Chip-Production.git
 cd Classical-Planning-Chip-Production
