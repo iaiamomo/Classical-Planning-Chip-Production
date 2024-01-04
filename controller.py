@@ -54,13 +54,16 @@ async def executionEngine(rnd, tot_cost):
     #command = f"./downward/fast-downward.py {config.PDDL['domainName']}_phase{phase}.pddl {config.PDDL['problemName']}_phase{phase}.pddl --search 'astar(lmcut())'" 
     #result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
     result = execute_downward(domain, problem)
+    print(result)
     #pr.disable()
     elapsed = time.time_ns() - now
     print(f"elapsed time: {elapsed}")
     #s = io.StringIO()
     #ps = pstats.Stats(pr, stream=s).sort_stats('cumtime')
     #ps.print_stats()
-    if phase == 1:
+    if phase == 0:
+        file_name = f'profiling_phase{phase}.txt'
+    elif phase == 1:
         file_name = f'profiling_phase{phase}.txt'
     elif phase == 2:
         file_name = f'profiling_phase{phase}_{size}.txt'
