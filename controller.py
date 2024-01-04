@@ -6,10 +6,6 @@ from buildPDDL import *
 from config import *
 import requests
 from actorsAPI import *
-
-import cProfile
-import pstats
-import io
 import time
 from memory_profiler import profile
 
@@ -41,26 +37,16 @@ async def executionEngine(rnd, tot_cost):
     # Retrieve information of Things and construct PDDL domain and problem files
     print("Collecting problem data...")
     desc = buildPDDL(phase, domain, problem)
-
-    #input("press enter to continue...")
     
     # Call planner
     # If plan not found, return 2 
     print("Invoking planner...")
 
     now = time.time_ns()
-    #pr = cProfile.Profile()
-    #pr.enable()
-    #command = f"./downward/fast-downward.py {config.PDDL['domainName']}_phase{phase}.pddl {config.PDDL['problemName']}_phase{phase}.pddl --search 'astar(lmcut())'" 
-    #result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
     result = execute_downward(domain, problem)
-    print(result)
-    #pr.disable()
     elapsed = time.time_ns() - now
     print(f"elapsed time: {elapsed}")
-    #s = io.StringIO()
-    #ps = pstats.Stats(pr, stream=s).sort_stats('cumtime')
-    #ps.print_stats()
+    
     if phase == 0:
         file_name = f'profiling_phase{phase}.txt'
     elif phase == 1:
@@ -68,7 +54,6 @@ async def executionEngine(rnd, tot_cost):
     elif phase == 2:
         file_name = f'profiling_phase{phase}_{size}.txt'
     with open(file_name, 'w+') as f:
-        #f.write(s.getvalue())
         f.write(f"elapsed time: {elapsed}\n")
     
     print(f"result planner: {result.returncode}")
