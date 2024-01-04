@@ -59,6 +59,8 @@ atomicTerms_phase0 = [
                         atomicTerm("implanted", "o - ChemicalsMaterial", "b - Boolean"),
                         
                         atomicTerm("tested", "o - ChipMaterial", "b - Boolean"),
+
+                        atomicTerm("diced", "o - ChipMaterial", "b - Boolean"),
                         
                         atomicTerm("packed", "o - ChipMaterial", "b - Boolean")
 ]
