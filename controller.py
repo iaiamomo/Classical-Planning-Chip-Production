@@ -8,6 +8,7 @@ import requests
 from actorsAPI import *
 import time
 from memory_profiler import profile
+from datetime import datetime
 
 rnd = 0
 total_cost = 0
@@ -17,7 +18,16 @@ mode = config_json['mode']
 phase = config_json['phase']
 size = config_json['size']
 
-@profile
+now = datetime.now().strftime("%d_%m_%Y-%H_%M_%S")
+
+if phase in [0, 2]:
+    file_name = f'{now}_profiling_phase{phase}_{size}.txt'
+    fp_downward = f"{now}_profiling_downward{phase}_{size}.txt"
+elif phase == 1:
+    file_name = f'{now}_profiling_phase{phase}.txt'
+    fp_downward = f"{now}_profiling_downward{phase}.txt"
+
+@profile(stream=open(fp_downward, 'w+'))
 def execute_downward(domain, problem):
     command = f"./downward/fast-downward.py {domain} {problem} --search 'astar(lmcut())'" 
     result = subprocess.run(command, shell = True, stdout=subprocess.PIPE)
@@ -25,8 +35,8 @@ def execute_downward(domain, problem):
 
 async def executionEngine(rnd, tot_cost):
     if phase == 0:
-        domain = f"{config.PDDL['domainName']}.pddl"
-        problem = f"{config.PDDL['problemName']}.pddl"
+        domain = f"{config.PDDL['domainName']}_{size}.pddl"
+        problem = f"{config.PDDL['problemName']}_{size}.pddl"
     elif phase == 1:
         domain = f"{config.PDDL['domainName']}_phase{phase}.pddl"
         problem = f"{config.PDDL['problemName']}_phase{phase}.pddl"
@@ -46,13 +56,7 @@ async def executionEngine(rnd, tot_cost):
     result = execute_downward(domain, problem)
     elapsed = time.time_ns() - now
     print(f"elapsed time: {elapsed}")
-    
-    if phase == 0:
-        file_name = f'profiling_phase{phase}.txt'
-    elif phase == 1:
-        file_name = f'profiling_phase{phase}.txt'
-    elif phase == 2:
-        file_name = f'profiling_phase{phase}_{size}.txt'
+
     with open(file_name, 'w+') as f:
         f.write(f"elapsed time: {elapsed}\n")
     
