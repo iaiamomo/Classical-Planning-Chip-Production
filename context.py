@@ -43,7 +43,7 @@ atomicTerms_phase0 = [
                         atomicTerm("taken", "o - ImpurityMaterial", "b - Boolean"),
                         atomicTerm("taken", "o - ResistMaterial", "b - Boolean"),
                         atomicTerm("taken", "o - ChemicalsMaterial", "b - Boolean"),
-                        atomicTerm("taken", "o - ChipMaterial", "b - Boolean"),
+
                         atomicTerm("status", "o - Service", "b - State"),
 
                         atomicTerm("masked", "o - Design", "b - Boolean"),
