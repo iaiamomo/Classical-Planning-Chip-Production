@@ -35,13 +35,13 @@ docker exec -it <CONTAINER_ID> bash
 ```sh
 # 1° term: Industrial API server
 cd Classical-Planning-Chip-Production/IndustrialAPI
-python app.py
+python3 app.py
 # 2° term: manufacturing services
 cd Classical-Planning-Chip-Production/IndustrialAPI
-python launch_devices.py
+python3 launch_devices.py
 # 3° term: controller
 cd Classical-Planning-Chip-Production
-python controller.py    
+python3 controller.py    
 ```
 
 3. To shut-down the services please press ``Ctrl + C`` in the 1° terminal.

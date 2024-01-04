@@ -28,7 +28,10 @@ def execute_downward(domain, problem):
     return result
 
 async def executionEngine(rnd, tot_cost):
-    if phase == 1:
+    if phase == 0:
+        domain = f"{config.PDDL['domainName']}.pddl"
+        problem = f"{config.PDDL['problemName']}.pddl"
+    elif phase == 1:
         domain = f"{config.PDDL['domainName']}_phase{phase}.pddl"
         problem = f"{config.PDDL['problemName']}_phase{phase}.pddl"
     elif phase == 2:

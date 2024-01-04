@@ -11,6 +11,10 @@ def buildPDDL(phase, domain, problem):
     tasks = [] 
     groundAtomicTerms = []
     
+    if phase == 0:
+        goal = context.goal_phase0
+        atomicTerms = context.atomicTerms_phase0
+        instances = context.instances_phase0
     if phase == 1:
         goal = context.goal_phase1
         atomicTerms = context.atomicTerms_phase1
@@ -19,10 +23,6 @@ def buildPDDL(phase, domain, problem):
         goal = context.goal_phase2
         atomicTerms = context.atomicTerms_phase2
         instances = context.instances_phase2
-    else:
-        goal = context.goal
-        atomicTerms = context.atomicTerms
-        instances = context.instances
     requirements = context.requirements
 
     subtypes_service = []

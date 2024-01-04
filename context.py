@@ -1,5 +1,14 @@
 from translator import *
 
+instances_phase0 = {"Design":["design"],
+                    "SiliconMaterial":["silicon"],
+                    "ImpurityMaterial":["impurity"],
+                    "ResistMaterial":["resist"],
+                    "ChemicalsMaterial":["chemicals"],
+                    "ChipMaterial":["chip"],
+                    "Boolean":["true","false"],
+                    "State":["available","broken"]}
+
 instances_phase1 = {"Design":["design"],
                     "BoronMaterial":["boron"],
                     "PhosphorMaterial":["phosphor"],
@@ -28,6 +37,32 @@ instances_phase2 = {"BoronMaterial":["boron"],
 types = { "Object": [] }
 
 # predicates
+atomicTerms_phase0 = [
+                        atomicTerm("taken", "o - Design", "b - Boolean"),
+                        atomicTerm("taken", "o - SiliconMaterial", "b - Boolean"),
+                        atomicTerm("taken", "o - ImpurityMaterial", "b - Boolean"),
+                        atomicTerm("taken", "o - ResistMaterial", "b - Boolean"),
+                        atomicTerm("taken", "o - ChemicalsMaterial", "b - Boolean"),
+                        atomicTerm("taken", "o - ChipMaterial", "b - Boolean"),
+                        atomicTerm("status", "o - Service", "b - State"),
+
+                        atomicTerm("masked", "o - Design", "b - Boolean"),
+                        atomicTerm("masked", "o - SiliconMaterial", "b - Boolean"), 
+                        atomicTerm("masked", "o - ChipMaterial", "b - Boolean"),
+                        
+                        atomicTerm("lithographed", "o - SiliconMaterial", "b - Boolean"),
+                        atomicTerm("lithographed", "o - ChipMaterial", "b - Boolean"),
+                        
+                        atomicTerm("implanted", "o - ChipMaterial", "b - Boolean"),
+                        atomicTerm("implanted", "o - ImpurityMaterial", "b - Boolean"),
+                        atomicTerm("implanted", "o - ResistMaterial", "b - Boolean"),
+                        atomicTerm("implanted", "o - ChemicalsMaterial", "b - Boolean"),
+                        
+                        atomicTerm("tested", "o - ChipMaterial", "b - Boolean"),
+                        
+                        atomicTerm("packed", "o - ChipMaterial", "b - Boolean")
+]
+
 atomicTerms_phase1 = [  atomicTerm("taken", "o - Design", "b - Boolean"),
                         atomicTerm("taken", "o - BoronMaterial", "b - Boolean"),
                         atomicTerm("taken", "o - PhosphorMaterial", "b - Boolean"),
@@ -70,6 +105,8 @@ atomicTerms_phase2 = [  atomicTerm("cleaned", "o - Material", "b - Boolean"),
 requirements = ["strips", "equality", "typing"]
 
 # plan goal
+goal_phase0 = [groundAtomicTerm("packed", "chip", "true")]
+
 goal_phase1 = [ groundAtomicTerm("taken", "design", "true"),
                 groundAtomicTerm("taken", "boron", "true"),
                 groundAtomicTerm("taken", "phosphor", "true"),
