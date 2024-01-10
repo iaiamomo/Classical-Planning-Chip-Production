@@ -16,12 +16,13 @@ total_cost = 0
 config_json = json.load(open('IndustrialAPI/config.json', 'r'))
 mode = config_json['mode']
 phase = config_json['phase']
+version = config_json['version']
 size = config_json['size']
 
 now = datetime.now().strftime("%d_%m_%Y-%H_%M_%S")
 
 if phase in [0, 2]:
-    file_name = f'{now}_profiling_phase{phase}_{size}.txt'
+    file_name = f'{now}_profiling_phase{phase}_{size}_{version}.txt'
     fp_downward = f"{now}_profiling_downward{phase}_{size}.txt"
 elif phase == 1:
     file_name = f'{now}_profiling_phase{phase}.txt'
@@ -35,8 +36,8 @@ def execute_downward(domain, problem):
 
 async def executionEngine(rnd, tot_cost):
     if phase == 0:
-        domain = f"{config.PDDL['domainName']}_{size}.pddl"
-        problem = f"{config.PDDL['problemName']}_{size}.pddl"
+        domain = f"{config.PDDL['domainName']}_{size}_{version}.pddl"
+        problem = f"{config.PDDL['problemName']}_{size}_{version}.pddl"
     elif phase == 1:
         domain = f"{config.PDDL['domainName']}_phase{phase}.pddl"
         problem = f"{config.PDDL['problemName']}_phase{phase}.pddl"
