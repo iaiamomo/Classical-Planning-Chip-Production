@@ -1,6 +1,6 @@
 # Industrial API composition via Planning techinques - Chip Supply Chain case study
 
-Implementation a tool to compose the [Industrial API](https://github.com/iaiamomo/IndustrialAPI) of the manufacturing actos via planning techniques.
+Implementation a tool to compose the [Industrial API](https://github.com/iaiamomo/IndustrialAPI) of the manufacturing actors via planning techniques.
 
 Results of the experiments can be found in [experimental_results](experimental_results).
 
