@@ -5,8 +5,10 @@ IndustrialAPIs
 profiling*.txt
 sas_plan
 
-!experimental_results/*/*.txt
-!experimental_results/*/*.pddl
+!experimental_results/*.txt
+!experimental_results/*.pddl
+!old_stuff/*/*/*.txt
+!old_stuff/*/*/*.pddl
 
 ### Git ###
 # Created by git for backups. To disable backups in Git:
