@@ -2,7 +2,7 @@
 
 Implementation a tool to compose the [Industrial API](https://github.com/iaiamomo/IndustrialAPI) of the manufacturing actors via planning techniques.
 
-Results of the experiments can be found in [experimental_results](experimental_results).
+Results of the experiments can be found in [chip_experimental_results](chip_experimental_results).
 
 ## How to replicate the experiments
 The experiments can be replicated either by using docker or run it from source code. Befor starting the controller, you may need to set up the configuration file.
