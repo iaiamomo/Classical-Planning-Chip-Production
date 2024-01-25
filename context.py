@@ -60,9 +60,15 @@ atomicTerms_phase0 = [
                         
                         atomicTerm("tested", "o - ChipMaterial", "b - Boolean"),
 
+                        atomicTerm("smart_tested", "o - ChipMaterial", "b - Boolean"),
+
+                        atomicTerm("quality_checked", "o - ChipMaterial", "b - Boolean"),
+
                         atomicTerm("diced", "o - ChipMaterial", "b - Boolean"),
                         
-                        atomicTerm("packed", "o - ChipMaterial", "b - Boolean")
+                        atomicTerm("packed", "o - ChipMaterial", "b - Boolean"),
+
+                        atomicTerm("packed_cool", "o - ChipMaterial", "b - Boolean"),
 ]
 
 atomicTerms_phase1 = [  atomicTerm("taken", "o - Design", "b - Boolean"),

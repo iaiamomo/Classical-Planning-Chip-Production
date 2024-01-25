@@ -17,7 +17,7 @@ The experiments can be replicated either by using docker or run it from source c
         "size": "large"
     }
     ```
-    The JSON key <code>mode</code> accept the value <code>plan</code>, the key <code>phase</code> accepts the value <code>0</code> (representing the chip chain manufacturing case study), and the key <code>size</code> accepts <code>[small, medium, large]</code> values (related to the number of involved services).
+    The JSON key <code>mode</code> accept the value <code>plan</code>, the key <code>phase</code> accepts the value <code>0</code> (representing the chip chain manufacturing case study), and the key <code>size</code> accepts <code>[xsmall, small, medium, large]</code> values (related to the number of involved services).
 - [descriptions_phase](https://github.com/iaiamomo/IndustrialAPI/tree/main/actors_api_plan/descriptions_phase0_v4) contains the description of the manufacturing actors.
 - [context.py](context.py) contains some contextual information.
 
